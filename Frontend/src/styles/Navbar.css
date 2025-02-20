@@ -1,0 +1,132 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #161a1e;
+    padding: 1rem 2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+/* Navbar container */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Logo */
+.navbar-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 1px;
+    margin-left: -80px;
+}
+
+/* Navbar Links */
+.navbar-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: #1abc9c;
+}
+
+/* Auth Buttons */
+.navbar-auth {
+    display: flex;
+    gap: 1rem;
+}
+
+.login-btn,
+.register-btn {
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.login-btn:hover {
+    background-color: white;
+    color: #2c3e50;
+}
+
+.register-btn {
+    background-color: #dbba14;
+    color: white;
+    border: none;
+}
+
+.register-btn:hover {
+    background-color: #62e29d;
+}
+
+/* Hamburger Menu Icon */
+.menu-icon {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 900px) {
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #1c2126;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-links.open {
+        display: flex;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .navbar-auth {
+        display: none;
+    }
+}
+
+/* Prevent horizontal scrolling */
+body, html {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}

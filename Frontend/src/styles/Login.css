@@ -1,0 +1,99 @@
+/* Auth Page Styling */
+.auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 8px rgba(26, 188, 156, 0.6);
+  }
+  
+  .form-links {
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  
+  .form-links a {
+    text-decoration: none;
+    color: #1abc9c;
+  }
+  
+  .form-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .btn {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #16a085;
+  }
+  
+  .btn:active {
+    transform: scale(0.95);
+  }
+  
+  .auth-footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .auth-footer a {
+    text-decoration: none;
+    color: #1abc9c;
+    font-weight: bold;
+  }
+  
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+  
