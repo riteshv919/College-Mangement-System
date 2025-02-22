@@ -127,3 +127,106 @@
   .logout-btn:hover {
     background-color: #e74c3c;
   }  
+
+  .dashboard-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .sidebar-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar ul li a svg {
+    margin-right: 10px;
+  }
+  
+  .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .dashboard-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .candidate-list, .vote-form {
+    margin-bottom: 20px;
+  }
+  
+  .candidate-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .candidate-list ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .vote-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .vote-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .vote-form button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Voting Widget */
+.widget.vote {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .widget.vote a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .widget.vote a:hover {
+    text-decoration: underline;
+  }

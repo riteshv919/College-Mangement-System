@@ -1,116 +1,108 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const adminRoutes = require('./routes/admin');
+const studentRoutes = require('./routes/student');
+const complaintRoutes = require("./routes/complaintRoutes");
+const path = require("path");
+
+
+
+// Import routes
+const authRoutes = require("./routes/authRoutes");
+const facilityRoutes = require("./routes/facilityRoutes");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 3001;
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/collegeDB", {
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+app.use('/admin', adminRoutes);
+app.use('/student', studentRoutes);
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve uploaded files
+
+// Routes
+app.use("/api/complaints", complaintRoutes);
+
+
+mongoose.connect('mongodb://localhost:27017/studentPortal', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Define User Schema
-const UserSchema = new mongoose.Schema({
-  name: String,
-  email: { type: String, unique: true },
-  password: String,
-  role: String, // 'student', 'faculty', 'admin'
+// Define Notification Schema
+const notificationSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  date: { type: Date, default: Date.now },
 });
 
-const User = mongoose.model("User", UserSchema);
+// Create Notification Model
+const Notification = mongoose.model('Notification', notificationSchema);
 
-app.use(express.json());
-app.use(cors());
-
-// Regex pattern for strict SGGS email validation
-const SGGS_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@sggs\.ac\.in$/;
-
-/* 
-============================
-🔹 USER REGISTRATION ROUTE
-============================
-*/
-app.post("/api/auth/register", async (req, res) => {
-  const { name, email, password, role } = req.body;
-
-  // Validate role
-  if (!["student", "faculty"].includes(role)) {
-    return res.status(400).json({ message: "Invalid role" });
-  }
-
-  // Validate SGGS email format
-  if (!SGGS_EMAIL_REGEX.test(email)) {
-    return res.status(400).json({ message: "Invalid email format. Use an @sggs.ac.in email." });
-  }
+// POST endpoint to store notifications
+app.post('/submit-notification', async (req, res) => {
+  const { title, description } = req.body;
 
   try {
-    // Check if email is already registered
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already registered" });
-    }
-
-    // Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-    });
-
-    await newUser.save();
-    res.status(201).json({ message: "User registered successfully" });
+      const newNotification = new Notification({ title, description });
+      await newNotification.save();
+      res.status(201).json({ message: 'Notification saved successfully!' });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+      console.error('Error saving notification:', error);
+      res.status(500).json({ message: 'Failed to save notification.' });
   }
 });
 
-/* 
-============================
-🔹 USER LOGIN ROUTE
-============================
-*/
-app.post("/api/auth/login", async (req, res) => {
+// GET endpoint to fetch notifications
+app.get('/notifications', async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    // ✅ Admin Hardcoded Authentication
-    if (email === "admin@sggs.ac.in" && password === "admin123") {
-      return res.status(200).json({
-        message: "Admin login successful",
-        user: { email, role: "admin", name: "Admin" },
-      });
-    }
-
-    // ✅ Validate email format (@sggs.ac.in)
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@sggs\.ac\.in$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ message: "Invalid email format. Use @sggs.ac.in" });
-    }
-
-    // ✅ Check if user exists in the database
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "User not found. Please register first." });
-    }
-
-    // ✅ Compare hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Incorrect password" });
-    }
-
-    res.status(200).json({ message: "Login successful", user });
+      const notifications = await Notification.find().sort({ date: -1 }); // Sort by date in descending order
+      res.status(200).json(notifications);
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ message: "Server error" });
+      console.error('Error fetching notifications:', error);
+      res.status(500).json({ message: 'Failed to fetch notifications.' });
   }
 });
 
+// ✅ Ensure MONGO_URI and MONGO_URI_FACILITY are defined
+if (!process.env.MONGO_URI || !process.env.MONGO_URI_FACILITY) {
+  console.error("❌ MONGO_URI or MONGO_URI_FACILITY is missing in .env file");
+  process.exit(1);
+}
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Connect to the first MongoDB database (for authentication)
+const authDB = mongoose.createConnection(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+authDB.on("connected", () => console.log("✅ Connected to Auth MongoDB"));
+authDB.on("error", (err) => console.error("❌ Auth MongoDB Connection Error:", err));
+
+// Connect to the second MongoDB database (for facility booking)
+const facilityDB = mongoose.createConnection(process.env.MONGO_URI_FACILITY, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+facilityDB.on("connected", () => console.log("✅ Connected to Facility MongoDB"));
+facilityDB.on("error", (err) => console.error("❌ Facility MongoDB Connection Error:", err));
+
+mongoose.connect('mongodb://localhost:27017/voting-system', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+
+// Pass the database connections to routes
+app.use("/api/auth", authRoutes(authDB)); // Pass authDB to authRoutes
+app.use("/api/facility", facilityRoutes(facilityDB)); // Pass facilityDB to facilityRoutes
+
+// Start the server
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

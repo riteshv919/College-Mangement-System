@@ -7,12 +7,24 @@ import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import StudentDashboard from "./Dashboards/student";
-import FacultyDashboard from "./Dashboards/faculty";
-import AdminDashboard from "./Dashboards/AdminDashboard.jsx";
-import NotFound from "./pages/notFound";
 import Register from "./pages/Register";
 import Forgot from "./pages/Forgot";
+import NotFound from "./pages/notFound";
+import StudentDashboardLayout from "./Dashboards/StudentDashboardLayout"; // ✅ FIXED IMPORT
+import FacultyDashboard from "./Dashboards/faculty";
+import AdminDashboardLayout from "./Dashboards/AdminDashboardLayout";
+import AdminDashboard from "./Dashboards/AdminDashboard";
+import FacilityRequestList from "./pages/FacilityRequestList";
+import CampusBookingForm from "./pages/FacilityBooking";
+// import AvailableDatesPage from "./pages/AvailableDatesPage";
+import AddCandidateForm from "./components/AddCandidateForm";
+import AnonymousComplaintForm  from "./pages/AnonymousComplaintForm.jsx"
+import NotificationForm from "./pages/NotificationForm.jsx"
+import Notification from "./pages/Notification.jsx"
+import VoteResults from "./components/VoteResults";
+import FacilityBooking from "./pages/FacilityBooking"
+import Profile from "./pages/Profile.jsx"
+
 
 const App = () => {
   return (
@@ -24,11 +36,10 @@ const App = () => {
 
 const MainLayout = () => {
   const { user } = useContext(AuthContext);
-  const isDashboard = window.location.pathname.includes("dashboard"); // Check if the route is for a dashboard
+  const isDashboard = window.location.pathname.includes("dashboard");
 
   return (
     <>
-      {/* Show Dashboard Navbar only on dashboard pages, otherwise show regular Navbar */}
       {isDashboard ? <DashboardNavbar /> : <Navbar />}
 
       <Routes>
@@ -37,15 +48,24 @@ const MainLayout = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<Forgot />} />
 
-        {/* Protected Routes Based on Role */}
+        {/* Student Routes */}
         <Route
           path="/student-dashboard"
           element={
             <ProtectedRoute role="student">
-              <StudentDashboard />
+              <StudentDashboardLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          {/* <Route index element={<CampusBookingForm />} /> Default Page */}
+          <Route index element={<Profile />} /> {/* Default page */}
+          <Route path="profile" element={<Profile />} />
+          <Route path="facility-booking" element={<FacilityBooking />} />
+          <Route path="complaints" element={<AnonymousComplaintForm  />} />
+          <Route path="notification" element={<Notification />} />
+        </Route>
+
+        {/* Faculty Routes */}
         <Route
           path="/faculty-dashboard"
           element={
@@ -54,20 +74,27 @@ const MainLayout = () => {
             </ProtectedRoute>
           }
         />
+
+        {/* Admin Dashboard (Uses Layout) */}
         <Route
-          path="/admin-dashboard"
+          path="/admin-dashboard/*"
           element={
             <ProtectedRoute role="admin">
-              <AdminDashboard />
+              <AdminDashboardLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="facility-requests" element={<FacilityRequestList />} />
+          <Route path="add-candidate" element={<AddCandidateForm />} />
+          <Route path="vote-results" element={<VoteResults />} />
+          <Route path="notification-form" element={<NotificationForm/>} />
+        </Route>
 
-        {/* Catch-All - 404 Page */}
+        {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* Show Footer only if not on a dashboard */}
       {!isDashboard && <Footer />}
     </>
   );

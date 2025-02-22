@@ -1,0 +1,124 @@
+/* Only apply styles inside .profile-page */
+.profile-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Restrict the background to only Profile Page */
+.profile-page {
+    background: linear-gradient(135deg, #e1e0e8, #c3cfe2);
+    text-align: center;
+    padding: 50px;
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Profile Card */
+.profile-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    transition: transform 0.3s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+}
+
+/* Profile Image */
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #004080;
+    transition: transform 0.3s;
+    animation: bounce 2s infinite;
+}
+
+.profile-img:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Subtitle */
+.subtitle {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Profile Button */
+.profile-btn {
+    background: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.profile-btn:hover {
+    background: #cc5200;
+    transform: scale(1.1);
+}
+
+/* Information Cards */
+.profile-card-info {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: slideIn 1s ease-in-out;
+}
+
+.profile-card-info:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.profile-card-info h2 {
+    color: #004080;
+    border-bottom: 2px solid #ff6600;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-card, .profile-card-info {
+        max-width: 90%;
+    }
+}

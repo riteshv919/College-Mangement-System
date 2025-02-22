@@ -15,8 +15,6 @@ const DashboardNavbar = () => {
         <Link to="#" className="dashboard-navbar-logo">Dashboard</Link>
         <div className="dashboard-navbar-links">
           <Link to="/dashboard">Home</Link>
-          <Link to="/dashboard/bookings">Facility Booking</Link>
-          <Link to="/dashboard/complaints">Complaints</Link>
           <Link to="/dashboard/settings">Settings</Link>
         </div>
       </div>

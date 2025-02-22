@@ -38,7 +38,7 @@ const Navbar = () => {
           <Link to="/login" className="login-btn" onClick={() => setMenuOpen(false)}>
             Login
           </Link>
-          <Link to="/register" className="register-btn" onClick={() => setMenuOpen(false)}>
+          <Link to="/register" className="register-btn-nav" onClick={() => setMenuOpen(false)}>
             Register
           </Link>
         </div>

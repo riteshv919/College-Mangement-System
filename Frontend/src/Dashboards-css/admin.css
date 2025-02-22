@@ -97,3 +97,162 @@
     background-color: #1be0e3;
   }
   
+  .request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .request-table th, .request-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .request-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .status-pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-approved {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status-rejected {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .approve-btn, .reject-btn {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .approve-btn {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .reject-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  .admin-dashboard {
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .sidebar-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .dashboard-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .add-candidate-form, .vote-results {
+    margin-bottom: 20px;
+  }
+  
+  .add-candidate-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .add-candidate-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-candidate-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .vote-results table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .vote-results th, .vote-results td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .vote-results th {
+    background-color: #f4f4f4;
+  }
+  
+  /* Add Candidate Widget */
+.widget.add-candidate {
+  background-color: #2196f3;
+  color: white;
+}
+
+.widget.add-candidate a {
+  color: white;
+  text-decoration: none;
+}
+
+.widget.add-candidate a:hover {
+  text-decoration: underline;
+}
+
+/* Voting Results Widget */
+.widget.vote-results {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.widget.vote-results a {
+  color: white;
+  text-decoration: none;
+}
+
+.widget.vote-results a:hover {
+  text-decoration: underline;
+}

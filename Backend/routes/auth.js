@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("./models/user");
 
 const router = express.Router();
 const JWT_SECRET = "your_jwt_secret"; // Use environment variables in production
@@ -9,28 +9,20 @@ const JWT_SECRET = "your_jwt_secret"; // Use environment variables in production
 // ✅ Register User
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
-
-    if (!name || !email || !password || !role) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    if (!["student", "faculty"].includes(role)) {
-      return res.status(400).json({ message: "Invalid role specified" });
-    }
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+    const { fullName, collegeId, department, phone, email, password, role } = req.body;
+    
+    if (await User.findOne({ email })) {
+      return res.status(400).json({ message: "Email already in use." });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword, role });
+    const newUser = new User({ fullName, collegeId, department, phone, email, password: hashedPassword, role });
     await newUser.save();
 
-    res.status(201).json({ message: "Registration successful" });
+    res.status(201).json({ message: "User registered successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Registration Error:", error);
+    res.status(500).json({ message: "Server error." });
   }
 });
 

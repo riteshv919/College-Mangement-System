@@ -57,7 +57,7 @@
 }
 
 .login-btn,
-.register-btn {
+.register-btn-nav {
     text-decoration: none;
     padding: 0.6rem 1.2rem;
     border-radius: 5px;
@@ -77,13 +77,13 @@
     color: #2c3e50;
 }
 
-.register-btn {
+.register-btn-nav {
     background-color: #dbba14;
     color: white;
     border: none;
 }
 
-.register-btn:hover {
+.register-btn-nav:hover {
     background-color: #62e29d;
 }
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext"; // Import AuthContext
-import { FaBook, FaCalendarAlt, FaExclamationTriangle, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { AuthContext } from "../context/AuthContext";
+import { FaBook, FaCalendarAlt, FaExclamationTriangle, FaUserCircle, FaSignOutAlt, FaVoteYea } from "react-icons/fa";
 import "../Dashboards-css/student.css";
 
 const StudentDashboard = () => {
@@ -25,10 +25,11 @@ const StudentDashboard = () => {
       >
         <h2 className="sidebar-title">Dashboard</h2>
         <ul>
-          <li><Link to="/booking"><FaBook /> Facility Booking</Link></li>
+          <li><Link to="/student-dashboard/facility-booking"><FaBook /> Facility Booking</Link></li>
           <li><Link to="/complaints"><FaExclamationTriangle /> Complaints</Link></li>
           <li><Link to="/schedule"><FaCalendarAlt /> Class Schedule</Link></li>
           <li><Link to="/profile"><FaUserCircle /> Profile</Link></li>
+          <li><Link to="/student-dashboard/vote"><FaVoteYea /> Voting</Link></li>
         </ul>
 
         {/* 🔹 Logout Button */}
@@ -56,7 +57,7 @@ const StudentDashboard = () => {
           <motion.div className="widget booking" whileHover={{ scale: 1.05 }}>
             <h3>Campus Facility Booking</h3>
             <p>Reserve library rooms, auditoriums, and sports complexes.</p>
-            <Link to="/booking">Book Now</Link>
+            <Link to="/student-dashboard/facility-booking">Book Now</Link>
           </motion.div>
 
           {/* Complaints */}
@@ -78,6 +79,13 @@ const StudentDashboard = () => {
             <h3>Profile & Settings</h3>
             <p>Update personal information & preferences.</p>
             <Link to="/profile">Edit</Link>
+          </motion.div>
+
+          {/* Voting */}
+          <motion.div className="widget vote" whileHover={{ scale: 1.05 }}>
+            <h3>Voting System</h3>
+            <p>Cast your vote for the upcoming elections.</p>
+            <Link to="/student-dashboard/vote">Vote Now</Link>
           </motion.div>
         </div>
       </motion.main>

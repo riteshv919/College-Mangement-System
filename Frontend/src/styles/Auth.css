@@ -68,7 +68,7 @@ form {
 }
 
 /* Submit Button */
-button {
+.register-btn {
   width: 100%;
   padding: 12px;
   font-size: 16px;
@@ -81,7 +81,7 @@ button {
   transition: all 0.3s ease-in-out;
 }
 
-button:hover {
+.register-btn:hover {
   background: #16a085;
 }
 

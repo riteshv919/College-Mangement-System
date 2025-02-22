@@ -1,5 +1,7 @@
 const otpGenerator = require('otp-generator');
 const nodemailer = require('nodemailer');
+const dotenv = require("dotenv");
+dotenv.config() ;
 
 // ✅ Function to send OTP
 const sendOTP = async (req, res) => {
